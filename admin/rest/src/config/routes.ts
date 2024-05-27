@@ -1,11 +1,11 @@
 export const Routes = {
-  dashboard: '/',
+  dashboard: '/my-shops',
   login: '/login',
   logout: '/logout',
   register: '/register',
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
-  adminMyShops: '/my-shops',
+  adminMyShops: '/',
   profile: '/profile',
   verifyCoupons: '/coupons/verify',
   settings: '/settings',
