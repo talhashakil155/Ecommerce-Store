@@ -1,13 +1,11 @@
 import type { NextPageWithLayout } from '@/types';
 import NotFound from '@/components/ui/not-found';
-import { useTranslation } from 'next-i18next';
 import { useShops } from '@/framework/shop';
 import ErrorMessage from '@/components/ui/error-message';
 export { getStaticProps } from '@/framework/shops-page.ssr';
 import { SHOPS_PER_PAGE } from '@/framework/client/variables';
 import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 import Seo from '@/components/seo/seo';
 import { useWindowSize } from '@/lib/use-window-size';
 import { useType } from '@/framework/type';

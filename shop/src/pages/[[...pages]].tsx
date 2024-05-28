@@ -9,47 +9,19 @@ import CouponLoader from '@/components/ui/loaders/coupon-loader';
 import { useShops } from '@/framework/shop';
 import ErrorMessage from '@/components/ui/error-message';
 import ShopCard from '@/components/ui/cards/shop';
-import { useGetSearchNearShops } from '@/framework/shop';
 import { SHOPS_PER_PAGE } from '@/framework/client/variables';
 import { getLayoutWithFooter } from '@/components/layouts/layout-with-footer';
 import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { scroller } from 'react-scroll';
-import { useWindowSize } from '@/lib/use-window-size';
-import { useType } from '@/framework/type';
 
 export { getStaticPaths, getStaticProps };
 
-const CartCounterButton = dynamic(
-  () => import('@/components/cart/cart-counter-button'),
-  { ssr: false },
-);
-const Classic = dynamic(() => import('@/components/layouts/classic'));
-const Standard = dynamic(() => import('@/components/layouts/standard'));
-const Modern = dynamic(() => import('@/components/layouts/modern'));
-const Minimal = dynamic(() => import('@/components/layouts/minimal'));
-const Compact = dynamic(() => import('@/components/layouts/compact'));
-
-const MAP_LAYOUT_TO_GROUP: Record<string, any> = {
-  classic: Classic,
-  modern: Modern,
-  standard: Standard,
-  minimal: Minimal,
-  compact: Compact,
-  default: Classic,
-};
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ variables, layout }) => {
+> = () => {
   const { t } = useTranslation('common');
   const { query } = useRouter();
-  const { width } = useWindowSize();
-  const { type } = useType(variables.types.type);
-
-  console.log('layout', variables);
-
-  const Component = MAP_LAYOUT_TO_GROUP[layout];
 
   const limit = SHOPS_PER_PAGE;
   const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
@@ -57,10 +29,6 @@ const Home: NextPageWithLayout<
       limit,
       is_active: 1,
     });
-  const { data } = useGetSearchNearShops({
-    lat: query?.lat?.toString() as string,
-    lng: query?.lng?.toString() as string,
-  });
 
   useEffect(() => {
     if (query.text || query.category) {
