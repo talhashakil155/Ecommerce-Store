@@ -129,7 +129,7 @@ export const siteSettings = {
         title: 'text-explore',
         links: [
           {
-            name: 'Shops',
+            name: 'Explore',
             href: Routes.shops,
           },
           {
