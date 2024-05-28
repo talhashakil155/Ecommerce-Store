@@ -27,7 +27,7 @@ export const Routes = {
   customerRefundPolicies: '/customer-refund-policies',
   vendorRefundPolicies: '/vendor-refund-policies',
   contactUs: '/contact',
-  shops: '/shops',
+  shops: '/explore',
   cards: '/cards',
   shop: (slug: string) => `/shops/${encodeURIComponent(slug)}`,
   downloads: '/downloads',
