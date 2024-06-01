@@ -104,6 +104,7 @@ export const siteSettings = {
   headerLinks: [
     { href: Routes.shops, icon: null, label: 'nav-menu-shops' },
     { href: Routes.coupons, icon: null, label: 'nav-menu-offer' },
+    // { href: 'location', icon: location, label: 'location' },
     { href: Routes.contactUs, label: 'nav-menu-contact' },
     { href: Routes.flashSale, label: 'nav-menu-flash-sale' },
     { href: Routes.manufacturers, label: 'text-manufacturers' },
