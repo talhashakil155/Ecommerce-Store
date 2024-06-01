@@ -62,7 +62,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
             {reverseBanners?.map((banner, idx) => (
               <SwiperSlide key={idx}>
                 <div
-                  className={cn('relative h-screen w-full', {
+                  className={cn('relative min-h-[70vh] w-full', {
                     'max-h-140': layout === 'standard',
                     'max-h-[320px] md:max-h-[680px]': layout === 'minimal',
                   })}
@@ -76,10 +76,10 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                   />
                   <div
                     className={cn(
-                      'absolute inset-0 mt-8 flex w-full flex-col items-center justify-center p-5 text-center md:px-20 lg:space-y-10',
+                      'absolute inset-0 mt-20 flex w-full flex-col items-center  p-5 text-center md:px-20 lg:space-y-10',
                       {
                         'space-y-5 md:!space-y-8': layout === 'minimal',
-                      }
+                      },
                     )}
                   >
                     <h1
@@ -87,7 +87,7 @@ const BannerWithSearch: React.FC<BannerProps> = ({ banners, layout }) => {
                         'text-2xl font-bold tracking-tight text-heading lg:text-4xl xl:text-5xl',
                         {
                           '!text-accent': layout === 'minimal',
-                        }
+                        },
                       )}
                     >
                       {banner?.title}
