@@ -27,7 +27,7 @@ const ShopPage: NextPageWithLayout<
 
   const isGerman = router.locale === 'de';
   const isBook = router.asPath.includes('/book');
-
+  variables.shop_id = '6';
   return (
     <div className="flex flex-col bg-gray-100 lg:flex-row lg:items-start lg:p-8">
       <ShopSidebar shop={shop} className="sticky top-24 lg:top-28" />
