@@ -1,35 +1,42 @@
-import { useType } from '@/framework/type';
-import dynamic from 'next/dynamic';
-const ErrorMessage = dynamic(() => import('@/components/ui/error-message'));
-const BannerWithSearch = dynamic(
-  () => import('@/components/banners/banner-with-search'),
-);
-const BannerShort = dynamic(() => import('@/components/banners/banner-short'));
-const BannerWithoutSlider = dynamic(
-  () => import('@/components/banners/banner-without-slider'),
-);
-const BannerWithPagination = dynamic(
-  () => import('@/components/banners/banner-with-pagination'),
-);
-const MAP_BANNER_TO_GROUP: Record<string, any> = {
-  classic: BannerWithSearch,
-  modern: BannerShort,
-  minimal: BannerWithoutSlider,
-  standard: BannerWithSearch,
-  compact: BannerWithPagination,
-  default: BannerWithSearch,
-};
+import { useRef } from 'react';
+import React from 'react';
+import Papa from 'papaparse';
+import Button from '@/components/ui/button';
 
-const Banner: React.FC<{ layout: string; variables: any }> = ({
-  layout,
-  variables,
-}) => {
-  const { type, error } = useType(variables.type);
-  if (error) return <ErrorMessage message={error.message} />;
-  const Component = MAP_BANNER_TO_GROUP[layout];
+const ImportCsv: React.FC<{ setFiles: any }> = ({ setFiles }) => {
+  const uploadRef = useRef<HTMLInputElement>(null);
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        complete: (results) => {
+          if (results.data.length) {
+            console.log(results.data);
+          }
+        },
+      });
+    }
+  };
   return (
-    <Component banners={type?.banners} layout={layout} slug={type?.slug} />
+    <>
+      <input
+        type="file"
+        accept=".csv"
+        ref={uploadRef}
+        onChange={handleFileUpload}
+        className="hidden"
+      />
+      <Button
+        className="w-32"
+        size="small"
+        onClick={() => uploadRef.current?.click()}
+      >
+        Import
+      </Button>
+    </>
   );
 };
 
-export default Banner;
+export default ImportCsv;
