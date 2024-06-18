@@ -8,9 +8,11 @@ import ProductsGrid from '@/components/products/grid';
 import { getLayout } from '@/components/layouts/layout';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
+import PromotionSliders from '@/components/promotions/promotions';
 import { NextPageWithLayout } from '@/types';
 import { InferGetStaticPropsType } from 'next';
 import { getStaticPaths, getStaticProps } from '@/framework/shop.ssr';
+// import { getStaticPaths, getStaticProps } from '@/framework/home-pages.ssr';
 export { getStaticPaths, getStaticProps };
 
 const CartCounterButton = dynamic(
@@ -27,9 +29,9 @@ const ShopPage: NextPageWithLayout<
 
   const isGerman = router.locale === 'de';
   const isBook = router.asPath.includes('/book');
-
   return (
     <div className="flex flex-col bg-gray-100 lg:flex-row lg:items-start lg:p-8">
+      {/* <PromotionSliders variables={variables.types} /> */}
       <ShopSidebar shop={shop} className="sticky top-24 lg:top-28" />
 
       <div className="flex flex-col w-full p-4 pb-12 lg:p-0 ltr:lg:pl-8 rtl:lg:pr-8">
@@ -44,6 +46,7 @@ const ShopPage: NextPageWithLayout<
             className="w-full h-full"
           />
         </div>
+        {/* <Categories layout="classic" variables={variables.categories} /> */}
         <ProductsGrid
           className="py-8"
           gridClassName={classNames(

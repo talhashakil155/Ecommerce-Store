@@ -41,7 +41,7 @@ const Header = ({ layout }: { layout?: string }) => {
   const { show, hideHeaderSearch } = useHeaderSearch();
   const [_, setDrawerView] = useAtom(drawerAtom);
   const [displayMobileHeaderSearch, setDisplayMobileHeaderSearch] = useAtom(
-    displayMobileHeaderSearchAtom
+    displayMobileHeaderSearchAtom,
   );
   const [isAuthorize] = useAtom(authorizationAtom);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -56,7 +56,7 @@ const Header = ({ layout }: { layout?: string }) => {
   // }, [isHomePage]);
   const isFlattenHeader = useMemo(
     () => !show && isHomePage && layout !== 'modern',
-    [show, isHomePage, layout]
+    [show, isHomePage, layout],
   );
 
   function handleSidebar(view: string) {
@@ -147,7 +147,7 @@ const Header = ({ layout }: { layout?: string }) => {
             ) : null} */}
 
               <div className="hidden ltr:ml-10 ltr:mr-auto rtl:mr-10 rtl:ml-auto xl:block">
-                <GroupsDropdownMenu />
+                {/* <GroupsDropdownMenu /> */}
               </div>
             </div>
 
