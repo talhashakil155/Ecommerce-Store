@@ -17,6 +17,7 @@ import { ShopWebIcon } from '@/components/icons/shop/web';
 import { ShopContactIcon } from '@/components/icons/shop/contact';
 import { ShopTermsIcon } from '@/components/icons/shop/terms';
 import { ShopCouponIcon } from '@/components/icons/shop/coupon';
+import Categories from '@/components/categories/categories';
 import { Routes } from '@/config/routes';
 import Link from 'next/link';
 
@@ -24,12 +25,15 @@ type ShopSidebarProps = {
   shop: Shop | any;
   className?: string;
   cardClassName?: string;
+  categories?: any;
+  shopType?: string;
 };
 
 const ShopSidebar: React.FC<ShopSidebarProps> = ({
   shop,
   className,
   cardClassName,
+  shopType,
 }) => {
   const { t } = useTranslation('common');
   const { openModal } = useModalAction();
@@ -120,6 +124,16 @@ const ShopSidebar: React.FC<ShopSidebarProps> = ({
                   </div>
                 )}
               </div>
+
+              <Categories
+                layout="classic"
+                variables={{
+                  language: 'en',
+                  limit: 1000,
+                  parent: 'null',
+                  type: shopType,
+                }}
+              />
 
               <div className="grid grid-cols-[repeat(auto-fill,minmax(70px,1fr))] text-sm gap-1.5 p-6">
                 {settings?.enableCoupons ? (
