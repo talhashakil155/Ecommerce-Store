@@ -8,6 +8,7 @@ import ProductCard from '@/components/products/cards/card';
 import ErrorMessage from '@/components/ui/error-message';
 import { useProducts } from '@/framework/product';
 import { PRODUCTS_PER_PAGE } from '@/framework/client/variables';
+import { useRouter } from 'next/router';
 import type { Product } from '@/types';
 
 interface Props {
@@ -99,6 +100,12 @@ export default function ProductsGrid({
   variables,
   column = 'auto',
 }: ProductsGridProps) {
+  const { query } = useRouter();
+  const categories = query?.category;
+  variables = {
+    ...variables,
+    categories: categories ?? null,
+  };
   const { products, loadMore, isLoadingMore, isLoading, hasMore, error } =
     useProducts(variables);
 

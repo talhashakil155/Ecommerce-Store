@@ -11,10 +11,12 @@ import { adminOnly } from '@/utils/auth-utils';
 import { useShopsQuery } from '@/data/shop';
 import { SortOrder } from '@/types';
 import PageHeading from '@/components/common/page-heading';
+import ImportCsv from '@/components/importCsv/importCsv';
 
 export default function AllShopPage() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [files, setFiles] = useState([]);
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState('created_at');
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
@@ -38,6 +40,9 @@ export default function AllShopPage() {
   }
   return (
     <>
+      <div className="w-full mb-8 flex justify-end">
+        <ImportCsv setFiles={{}} />
+      </div>
       <Card className="mb-8 flex flex-col items-center justify-between md:flex-row">
         <div className="mb-4 md:mb-0 md:w-1/4">
           <PageHeading title={t('common:sidebar-nav-item-shops')} />

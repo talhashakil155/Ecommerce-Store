@@ -16,6 +16,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import PageHeading from '@/components/common/page-heading';
+import ImportCsv from '@/components/importCsv/importCsv';
 
 interface ProductTypeOptions {
   name: string;
@@ -64,6 +65,9 @@ export default function ProductsPage() {
 
   return (
     <>
+      <div className="w-full mb-8 flex justify-end">
+        <ImportCsv setFiles={{}} />
+      </div>
       <Card className="mb-8 flex flex-col">
         <div className="flex w-full flex-col items-center md:flex-row">
           <div className="mb-4 md:mb-0 md:w-1/4">
