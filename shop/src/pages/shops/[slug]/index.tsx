@@ -13,7 +13,6 @@ import { NextPageWithLayout } from '@/types';
 import { InferGetStaticPropsType } from 'next';
 import { getStaticPaths, getStaticProps } from '@/framework/shop.ssr';
 export { getStaticPaths, getStaticProps };
-import ImportCsv from '@/components/importCsv/importCsv';
 
 const CartCounterButton = dynamic(
   () => import('@/components/cart/cart-counter-button'),
@@ -36,7 +35,6 @@ const ShopPage: NextPageWithLayout<
 
   return (
     <>
-      <ImportCsv setFiles={{}} />
       <div className="w-full ">
         <PromotionSliders variables={{ type: shopType }} />
       </div>

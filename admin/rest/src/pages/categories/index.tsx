@@ -16,6 +16,7 @@ import { useCategoriesQuery } from '@/data/category';
 import { useRouter } from 'next/router';
 import { Config } from '@/config';
 import PageHeading from '@/components/common/page-heading';
+import ImportCsv from '@/components/importCsv/importCsv';
 export default function Categories() {
   const { locale } = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,6 +50,9 @@ export default function Categories() {
 
   return (
     <>
+      <div className="w-full mb-8 flex justify-end">
+        <ImportCsv setFiles={{}} />
+      </div>
       <Card className="mb-8 flex flex-col">
         <div className="flex w-full flex-col items-center md:flex-row">
           <div className="mb-4 md:mb-0 md:w-1/4">
