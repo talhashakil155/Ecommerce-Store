@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
 import PromotionSliders from '@/components/promotions/promotions';
 import ShopSidebar from '@/components/shops/sidebar';
-import { productPlaceholder } from '@/lib/placeholders';
+import Banner from '@/components/banners/banner';
 import ProductsGrid from '@/components/products/grid';
 import { getLayout } from '@/components/layouts/layout';
 import { useRouter } from 'next/router';
@@ -36,6 +36,7 @@ const ShopPage: NextPageWithLayout<
   return (
     <>
       <div className="w-full ">
+        <Banner layout="classic" variables={{ type: shopType }} />
         <PromotionSliders variables={{ type: shopType }} />
       </div>
 
