@@ -110,6 +110,7 @@ class Client {
       categories,
       name,
       shop_id,
+      shops,
       author,
       manufacturer,
       min_price,
@@ -126,6 +127,7 @@ class Client {
           categories,
           name,
           shop_id,
+          shops,
           author,
           manufacturer,
           min_price,
@@ -214,11 +216,11 @@ class Client {
       ),
   };
   categories = {
-    all: ({ type, ...params }: Partial<CategoryQueryOptions>) =>
+    all: ({ shops, ...params }: Partial<CategoryQueryOptions>) =>
       HttpClient.get<CategoryPaginator>(API_ENDPOINTS.CATEGORIES, {
         searchJoin: 'and',
         ...params,
-        ...(type && { search: HttpClient.formatSearchParams({ type }) }),
+        ...({ search: HttpClient.formatSearchParams({ shops }) }),
       }),
   };
   tags = {

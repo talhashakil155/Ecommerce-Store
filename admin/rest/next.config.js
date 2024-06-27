@@ -25,6 +25,15 @@ const nextConfig = {
       'pickbazarlaravel.s3.ap-southeast-1.amazonaws.com',
       'lh3.googleusercontent.com',
       '127.0.0.1:8000',
+      'drive.google.com',
+    ],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '45.79.219.141',
+        port: '8070',
+        pathname: '/web/image/**',
+      },
     ],
   },
   ...(process.env.APPLICATION_MODE === 'production' && {

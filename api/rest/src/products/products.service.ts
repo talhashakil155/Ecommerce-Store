@@ -17,167 +17,350 @@ const popularProducts = plainToClass(Product, popularProductsJson);
 const bestSellingProducts = plainToClass(Product, bestSellingProductsJson);
 
 const options = {
-  keys: [
-    'name',
-    'type.slug',
-    'categories.slug',
-    'status',
-    'shop_id',
-    'author.slug',
-    'tags',
-    'manufacturer.slug',
-  ],
-  threshold: 0.3,
+	keys: [
+		'name',
+		// 'type.slug',
+		'categories.slug',
+		'status',
+		'shop_id',
+		'author.slug',
+		'tags',
+		'manufacturer.slug',
+		'shops.slug'
+	],
+	threshold: 0.3,
 };
 const fuse = new Fuse(products, options);
 
 @Injectable()
 export class ProductsService {
-  private products: any = products;
-  private popularProducts: any = popularProducts;
-  private bestSellingProducts: any = bestSellingProducts;
+	private products: any = products;
+	private popularProducts: any = popularProducts;
+	private bestSellingProducts: any = bestSellingProducts;
 
-  create(createProductDto: CreateProductDto) {
-    return this.products[0];
-  }
+	create(createProductDto: CreateProductDto) {
+		return this.products[0];
+	}
 
-  getProducts({ limit, page, search }: GetProductsDto): ProductPaginator {
-    if (!page) page = 1;
-    if (!limit) limit = 30;
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-    let data: Product[] = this.products;
-    if (search) {
-      const parseSearchParams = search.split(';');
-      const searchText: any = [];
-      for (const searchParam of parseSearchParams) {
-        const [key, value] = searchParam.split(':');
-        // TODO: Temp Solution
-        if (key !== 'slug') {
-          searchText.push({
-            [key]: value,
-          });
-        }
-      }
+	// async getProducts({ limit, page, search }: GetProductsDto): Promise<ProductPaginator> {
+	// 	try {
+	// 		const a = await getProductsFromOdoo().then((res) => {
+	// 			const odooProducts = plainToClass(Product, res as any[]);
+	// 			if (!page) page = 1;
+	// 			if (!limit) limit = 30;
+	// 			const startIndex = (page - 1) * limit;
+	// 			const endIndex = page * limit;
+	// 			// let data: Product[] = this.products;
+	// 			let data: Product[] = odooProducts;
+	// 			this.products = data;
+	// 			console.log("i am here with data: ", data);
+	// 			// console.log("this.products: ", this.products);
+	// 			if (search) {
+	// 				const parseSearchParams = search.split(';');
+	// 				const searchText: any = [];
+	// 				for (const searchParam of parseSearchParams) {
+	// 					const [key, value] = searchParam.split(':');
+	// 					// TODO: Temp Solution
+	// 					if (key !== 'slug') {
+	// 						searchText.push({
+	// 							[key]: value,
+	// 						});
+	// 					}
+	// 				}
+	// 				data = fuse
+	// 					.search({
+	// 						$and: searchText,
+	// 					})
+	// 					?.map(({ item }) => item);
+	// 			}
 
-      data = fuse
-        .search({
-          $and: searchText,
-        })
-        ?.map(({ item }) => item);
-    }
+	// 			const results = data.slice(startIndex, endIndex);
+	// 			// console.log("results: ", results);
+	// 			const url = `/products?search=${search}&limit=${limit}`;
+	// 			const abc = {
+	// 				data: results,
+	// 				...paginate(data.length, page, limit, results.length, url),
+	// 			};
+	// 			console.log("i am here 2 : ");
+	// 			return abc
+	// 		})
+	// 		return a
 
-    const results = data.slice(startIndex, endIndex);
-    const url = `/products?search=${search}&limit=${limit}`;
-    return {
-      data: results,
-      ...paginate(data.length, page, limit, results.length, url),
-    };
-  }
+	// 	} catch (error) {
+	// 		console.error('error:', error);
+	// 	}
+	// 	// return getProductsFromOdoo().then((res) => {
+	// 	// 	// const odooProducts = plainToClass(Product, res as any[]);
+	// 	// 	if (!page) page = 1;
+	// 	// 	if (!limit) limit = 30;
+	// 	// 	const startIndex = (page - 1) * limit;
+	// 	// 	const endIndex = page * limit;
+	// 	// 	let data: Product[] = this.products;
+	// 	// 	// this.products = data
+	// 	// 	if (search) {
+	// 	// 		const parseSearchParams = search.split(';');
+	// 	// 		const searchText: any = [];
+	// 	// 		for (const searchParam of parseSearchParams) {
+	// 	// 			const [key, value] = searchParam.split(':');
+	// 	// 			// TODO: Temp Solution
+	// 	// 			if (key !== 'slug') {
+	// 	// 				searchText.push({
+	// 	// 					[key]: value,
+	// 	// 				});
+	// 	// 			}
+	// 	// 		}
+	// 	// 		console.log("i am here with search params: ", parseSearchParams);
+	// 	// 		data = fuse
+	// 	// 			.search({
+	// 	// 				$and: searchText,
+	// 	// 			})
+	// 	// 			?.map(({ item }) => item);
+	// 	// 	}
 
-  getProductBySlug(slug: string): Product {
-    const product = this.products.find((p) => p.slug === slug);
-    const related_products = this.products
-      .filter((p) => p.type.slug === product.type.slug)
-      .slice(0, 20);
-    return {
-      ...product,
-      related_products,
-    };
-  }
+	// 	// 	const results = data.slice(startIndex, endIndex);
+	// 	// 	// console.log("results: ", results);
+	// 	// 	const url = `/products?search=${search}&limit=${limit}`;
+	// 	// 	return {
+	// 	// 		data: results,
+	// 	// 		...paginate(data.length, page, limit, results.length, url),
+	// 	// 	};
+	// 	// })
 
-  getPopularProducts({ limit, type_slug }: GetPopularProductsDto): Product[] {
-    let data: any = this.popularProducts;
-    if (type_slug) {
-      data = fuse.search(type_slug)?.map(({ item }) => item);
-    }
-    return data?.slice(0, limit);
-  }
-  getBestSellingProducts({ limit, type_slug }: GetBestSellingProductsDto): Product[] {
-    let data: any = this.bestSellingProducts;
-    if (type_slug) {
-      data = fuse.search(type_slug)?.map(({ item }) => item);
-    }
-    return data?.slice(0, limit);
-  }
 
-  getProductsStock({ limit, page, search }: GetProductsDto): ProductPaginator {
-    if (!page) page = 1;
-    if (!limit) limit = 30;
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-    let data: Product[] = this.products.filter((item) => item.quantity <= 9);
+	// 	// if (!page) page = 1;
+	// 	// if (!limit) limit = 30;
+	// 	// const startIndex = (page - 1) * limit;
+	// 	// const endIndex = page * limit;
+	// 	// let data: Product[] = this.products;
+	// 	// if (search) {
+	// 	//   const parseSearchParams = search.split(';');
+	// 	//   const searchText: any = [];
+	// 	//   for (const searchParam of parseSearchParams) {
+	// 	//     const [key, value] = searchParam.split(':');
+	// 	//     // TODO: Temp Solution
+	// 	//     if (key !== 'slug') {
+	// 	//       searchText.push({
+	// 	//         [key]: value,
+	// 	//       });
+	// 	//     }
+	// 	//   }
+	// 	//   data = fuse
+	// 	//     .search({
+	// 	//       $and: searchText,
+	// 	//     })
+	// 	//     ?.map(({ item }) => item);
+	// 	// }
 
-    if (search) {
-      const parseSearchParams = search.split(';');
-      const searchText: any = [];
-      for (const searchParam of parseSearchParams) {
-        const [key, value] = searchParam.split(':');
-        // TODO: Temp Solution
-        if (key !== 'slug') {
-          searchText.push({
-            [key]: value,
-          });
-        }
-      }
+	// 	// const results = data.slice(startIndex, endIndex);
+	// 	// // console.log("results: ", results);
+	// 	// const url = `/products?search=${search}&limit=${limit}`;
+	// 	// const abc = {
+	// 	//   data: results,
+	// 	//   ...paginate(data.length, page, limit, results.length, url),
+	// 	// };
+	// 	// console.log("i am here with abc: ", abc);
+	// 	// return abc
+	// }
 
-      data = fuse
-        .search({
-          $and: searchText,
-        })
-        ?.map(({ item }) => item);
-    }
+	getProducts({ limit, page, search }: GetProductsDto): ProductPaginator {
+		try {
+			return getProductsFromOdoo().then((res) => {
+				const odooProducts = plainToClass(Product, res as any[]);
+				if (!page) page = 1;
+				if (!limit) limit = 30;
+				const startIndex = (page - 1) * limit;
+				const endIndex = page * limit;
 
-    const results = data.slice(startIndex, endIndex);
-    const url = `/products-stock?search=${search}&limit=${limit}`;
-    return {
-      data: results,
-      ...paginate(data.length, page, limit, results.length, url),
-    };
-  }
+				this.products = odooProducts;
+				let data: Product[] = odooProducts;
+				const f = new Fuse(this.products, options);
 
-  getDraftProducts({ limit, page, search }: GetProductsDto): ProductPaginator {
-    if (!page) page = 1;
-    if (!limit) limit = 30;
-    const startIndex = (page - 1) * limit;
-    const endIndex = page * limit;
-    let data: Product[] = this.products.filter(
-      (item) => item.status === 'draft',
-    );
+				console.log("search param in products service: ", search);
+				if (search) {
+					const parseSearchParams = search.split(';');
+					const searchText: any = [];
+					for (const searchParam of parseSearchParams) {
+						const [key, value] = searchParam.split(':');
+						if (key === "type.slug" || key === "shop_id")
+							continue
+						// TODO: Temp Solution
+						if (key !== 'slug') {
+							searchText.push({
+								[key]: value,
+							});
+						}
+					}
+					data = f.search({ $and: searchText, })?.map(({ item }) => item) as Product[];
+				}
+				const results = data.slice(startIndex, endIndex);
+				// console.log("results: ", results);
+				const url = `/products?search=${search}&limit=${limit}`;
+				const prodPaginator = {
+					data: results,
+					...paginate(data.length, page, limit, results.length, url),
+				} as ProductPaginator;
+				return prodPaginator;
+			}) as unknown as ProductPaginator;
+		} catch (error) {
+			console.error('error:', error);
+		}
+	}
 
-    if (search) {
-      const parseSearchParams = search.split(';');
-      const searchText: any = [];
-      for (const searchParam of parseSearchParams) {
-        const [key, value] = searchParam.split(':');
-        // TODO: Temp Solution
-        if (key !== 'slug') {
-          searchText.push({
-            [key]: value,
-          });
-        }
-      }
+	getProductBySlug(slug: string): Product {
+		console.log("i am in getProductBySlug");
+		const product = this.products.find((p) => p.slug === slug);
+		const related_products = this.products
+			.filter((p) => p.type.slug === product.type.slug)
+			.slice(0, 20);
+		return {
+			...product,
+			related_products,
+		};
+	}
 
-      data = fuse
-        .search({
-          $and: searchText,
-        })
-        ?.map(({ item }) => item);
-    }
+	getPopularProducts({ limit, type_slug }: GetPopularProductsDto): Product[] {
+		let data: any = this.popularProducts;
+		if (type_slug) {
+			data = fuse.search(type_slug)?.map(({ item }) => item);
+		}
+		return data?.slice(0, limit);
+	}
+	getBestSellingProducts({ limit, type_slug }: GetBestSellingProductsDto): Product[] {
+		let data: any = this.bestSellingProducts;
+		if (type_slug) {
+			data = fuse.search(type_slug)?.map(({ item }) => item);
+		}
+		return data?.slice(0, limit);
+	}
 
-    const results = data.slice(startIndex, endIndex);
-    const url = `/draft-products?search=${search}&limit=${limit}`;
-    return {
-      data: results,
-      ...paginate(data.length, page, limit, results.length, url),
-    };
-  }
+	getProductsStock({ limit, page, search }: GetProductsDto): ProductPaginator {
+		if (!page) page = 1;
+		if (!limit) limit = 30;
+		const startIndex = (page - 1) * limit;
+		const endIndex = page * limit;
+		let data: Product[] = this.products.filter((item) => item.quantity <= 9);
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return this.products[0];
-  }
+		if (search) {
+			const parseSearchParams = search.split(';');
+			const searchText: any = [];
+			for (const searchParam of parseSearchParams) {
+				const [key, value] = searchParam.split(':');
+				// TODO: Temp Solution
+				if (key !== 'slug') {
+					searchText.push({
+						[key]: value,
+					});
+				}
+			}
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
-  }
+			data = fuse
+				.search({
+					$and: searchText,
+				})
+				?.map(({ item }) => item);
+		}
+
+		const results = data.slice(startIndex, endIndex);
+		const url = `/products-stock?search=${search}&limit=${limit}`;
+		return {
+			data: results,
+			...paginate(data.length, page, limit, results.length, url),
+		};
+	}
+
+	getDraftProducts({ limit, page, search }: GetProductsDto): ProductPaginator {
+		if (!page) page = 1;
+		if (!limit) limit = 30;
+		const startIndex = (page - 1) * limit;
+		const endIndex = page * limit;
+		let data: Product[] = this.products.filter(
+			(item) => item.status === 'draft',
+		);
+
+		if (search) {
+			const parseSearchParams = search.split(';');
+			const searchText: any = [];
+			for (const searchParam of parseSearchParams) {
+				const [key, value] = searchParam.split(':');
+				// TODO: Temp Solution
+				if (key !== 'slug') {
+					searchText.push({
+						[key]: value,
+					});
+				}
+			}
+
+			data = fuse
+				.search({
+					$and: searchText,
+				})
+				?.map(({ item }) => item);
+		}
+
+		const results = data.slice(startIndex, endIndex);
+		const url = `/draft-products?search=${search}&limit=${limit}`;
+		return {
+			data: results,
+			...paginate(data.length, page, limit, results.length, url),
+		};
+	}
+
+	update(id: number, updateProductDto: UpdateProductDto) {
+		return this.products[0];
+	}
+
+	remove(id: number) {
+		return `This action removes a #${id} product`;
+	}
+}
+
+
+export async function getProductsFromOdoo() {
+	const cookieHeader = await getAuthenticationToken()
+		.then((authResponse) => {
+			return authResponse.headers.get('set-cookie');
+		});
+	let sessionId = null;
+
+	if (cookieHeader) {
+		const cookies = cookieHeader.split(';');
+		cookies.forEach(cookie => {
+			if (cookie.trim().startsWith('session_id=')) {
+				sessionId = cookie.trim().substring('session_id='.length);
+			}
+		});
+
+		const url = "http://45.79.219.141:8070/shop/products/list?shop_id=all";
+
+		const response = await fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"Cookie": 'session_id=' + sessionId,
+			},
+		});
+		const t = await response.json()
+			.then((res) => {
+				return res.product_response;
+			});
+		return t;
+	}
+}
+
+export async function getAuthenticationToken() {
+	const authUrl = "http://45.79.219.141:8070/user/authenticate/login";
+	const authRequestBody = {
+		username: 'admin',
+		password: 'admin'
+	};
+
+	const authResponse = await fetch(authUrl, {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(authRequestBody),
+		credentials: 'include'
+	});
+	return authResponse;
 }

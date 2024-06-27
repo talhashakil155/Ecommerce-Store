@@ -111,6 +111,7 @@ export interface ProductQueryOptions extends QueryOptions {
   searchType: string;
   searchQuery: string;
   text: string;
+  shops: string;
 }
 
 export interface PopularProductQueryOptions extends QueryOptions {
@@ -131,6 +132,7 @@ export interface CategoryQueryOptions extends QueryOptions {
   language: string;
   parent: string | null;
   type: string;
+  shops: string;
 }
 
 export interface RefundQueryOptions extends QueryOptions {

@@ -62,6 +62,7 @@ export class HttpClient {
   }
 
   static formatSearchParams(params: Partial<SearchParamOptions>) {
+    console.log("inside format search params: ", params)
     return Object.entries(params)
       .filter(([, value]) => Boolean(value))
       .map(([k, v]) =>

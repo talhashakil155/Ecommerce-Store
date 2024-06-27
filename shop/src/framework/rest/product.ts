@@ -22,13 +22,16 @@ import { useTranslation } from 'next-i18next';
 import { useModalAction } from '@/components/ui/modal/modal.context';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation'
 
 export function useProducts(options?: Partial<ProductQueryOptions>) {
   const { locale } = useRouter();
-
+  const shopSlug = usePathname().match(/shops\/([^/?]*)/);
+  
   const formattedOptions = {
     ...formatProductsArgs(options),
     language: locale,
+    "shops": shopSlug? shopSlug[1] : "",
   };
 
   const {

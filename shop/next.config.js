@@ -19,6 +19,16 @@ module.exports = {
       'localhost',
       '127.0.0.1',
       'i.pravatar.cc',
+      'http://45.79.219.141:8070',
+      'drive.google.com',
+    ],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: '45.79.219.141',
+        port: '8070',
+        pathname: '/web/image/**',
+      },
     ],
   },
   ...(process.env.FRAMEWORK_PROVIDER === 'graphql' && {

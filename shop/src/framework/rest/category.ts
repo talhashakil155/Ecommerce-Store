@@ -4,15 +4,20 @@ import client from './client';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { mapPaginatorData } from '@/framework/utils/data-mappers';
 import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation'
 
 export function useCategories(options?: Partial<CategoryQueryOptions>) {
   const { locale } = useRouter();
+  const shopSlug = usePathname().match(/shops\/([^/?]*)/);
 
   const formattedOptions = {
     ...options,
     language: locale,
+    "shops": shopSlug? shopSlug[1] : "",
   };
 
+  console.log("options: ", options)
+  console.log("formattedOptions: ", formattedOptions)
   const {
     data,
     isLoading,

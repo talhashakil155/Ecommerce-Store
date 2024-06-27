@@ -3,6 +3,8 @@ import { Shop } from '../entities/shop.entity';
 
 export class CreateShopDto extends PickType(Shop, [
   'name',
+  'slug',
+  'owner',
   'address',
   'description',
   'cover_image',

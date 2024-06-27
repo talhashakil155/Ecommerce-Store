@@ -2,7 +2,6 @@ import { Image } from '@/components/ui/image';
 import { useWindowSize } from '@/lib/use-window-size';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
-import PromotionSliders from '@/components/promotions/promotions';
 import ShopSidebar from '@/components/shops/sidebar';
 import { productPlaceholder } from '@/lib/placeholders';
 import ProductsGrid from '@/components/products/grid';
@@ -29,53 +28,40 @@ const ShopPage: NextPageWithLayout<
   const isGerman = router.locale === 'de';
   const isBook = router.asPath.includes('/book');
 
-  const shopType = shop.slug.includes('-')
-    ? shop.slug?.split('-')[0]
-    : shop.slug;
-
+  // variables.shop_id = '6';
   return (
-    <>
-      <div className="w-full ">
-        <PromotionSliders variables={{ type: shopType }} />
-      </div>
+    <div className="flex flex-col bg-gray-100 lg:flex-row lg:items-start lg:p-8">
+      <ShopSidebar shop={shop} className="sticky top-24 lg:top-28" />
 
-      <div className="flex flex-col bg-gray-100 lg:flex-row lg:items-start lg:p-8">
-        <ShopSidebar
-          shopType={shopType}
-          shop={shop}
-          className="sticky top-24 lg:top-28"
-        />
-
-        <div className="flex flex-col w-full p-4 pb-12 lg:p-0 ltr:lg:pl-8 rtl:lg:pr-8">
-          <div className="relative w-full h-full overflow-hidden rounded">
-            <Image
-              alt={t('heading')}
-              src={
-                shop?.cover_image?.original! ?? '/shop-fallback-cover-photo.png'
-              }
-              width={2340}
-              height={870}
-              className="w-full h-full"
-            />
-          </div>
-          <ProductsGrid
-            className="py-8"
-            gridClassName={classNames(
-              'grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3',
-              {
-                'gap-6 md:gap-8': isBook,
-              },
-              {
-                'md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-[repeat(auto-fill,minmax(270px,1fr))]':
-                  isGerman,
-              },
-            )}
-            variables={variables}
+      <div className="flex flex-col w-full p-4 pb-12 lg:p-0 ltr:lg:pl-8 rtl:lg:pr-8">
+        <div className="relative w-full h-full overflow-hidden rounded">
+          <Image
+            alt={t('heading')}
+            src={
+              shop?.cover_image?.original! ?? '/shop-fallback-cover-photo.png'
+            }
+            width={2340}
+            height={870}
+            className="w-full h-full"
           />
         </div>
-        {width > 1023 && <CartCounterButton />}
+        <ProductsGrid
+          className="py-8"
+          gridClassName={classNames(
+            'grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3',
+            {
+              'gap-6 md:gap-8': isBook,
+            },
+            {
+              'md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-[repeat(auto-fill,minmax(270px,1fr))]':
+                isGerman,
+            },
+          )}
+          variables={variables}
+        />
       </div>
-    </>
+      {width > 1023 && <CartCounterButton />}
+    </div>
   );
 };
 
