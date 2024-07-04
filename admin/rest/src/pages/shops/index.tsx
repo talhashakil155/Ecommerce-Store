@@ -5,7 +5,7 @@ import Loader from '@/components/ui/loader/loader';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import ShopList from '@/components/shop/shop-list';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from '@/components/common/search';
 import { adminOnly } from '@/utils/auth-utils';
 import { useShopsQuery } from '@/data/shop';
@@ -16,6 +16,7 @@ import ImportCsv from '@/components/importCsv/importCsv';
 export default function AllShopPage() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
+  const [importedData, setImportedData] = useState(null);
   const [files, setFiles] = useState([]);
   const [page, setPage] = useState(1);
   const [orderBy, setOrder] = useState('created_at');
@@ -28,6 +29,15 @@ export default function AllShopPage() {
     sortedBy,
   });
 
+  useEffect(() => {
+    const data = sessionStorage.getItem('csvImportedData');
+    if (data) {
+      sessionStorage.removeItem('csvImportedData');
+      setImportedData(JSON.parse(data));
+      console.log('OYE DATA OYEE', data);
+    }
+  }, []);
+
   if (loading) return <Loader text={t('common:text-loading')} />;
   if (error) return <ErrorMessage message={error.message} />;
 
@@ -38,6 +48,7 @@ export default function AllShopPage() {
   function handlePagination(current: any) {
     setPage(current);
   }
+
   return (
     <>
       <div className="w-full mb-8 flex justify-end">

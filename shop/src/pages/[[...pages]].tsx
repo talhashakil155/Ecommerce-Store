@@ -47,7 +47,6 @@ const Home: NextPageWithLayout<
   }, [query.text, query.category]);
 
   const Component = MAP_LAYOUT_TO_GROUP[layout];
-  console.log('layout: ', layout);
   return (
     <>
       <Seo

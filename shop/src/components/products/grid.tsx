@@ -6,6 +6,7 @@ import NotFound from '@/components/ui/not-found';
 import rangeMap from '@/lib/range-map';
 import ProductCard from '@/components/products/cards/card';
 import ErrorMessage from '@/components/ui/error-message';
+import PromotionSliders from '@/components/promotions/promotions';
 import { useProducts } from '@/framework/product';
 import { PRODUCTS_PER_PAGE } from '@/framework/client/variables';
 import { useRouter } from 'next/router';
@@ -25,6 +26,7 @@ interface Props {
   isLoadingMore?: boolean;
   hasMore?: boolean;
   className?: string;
+  bannerVariables?: any;
 }
 
 export function Grid({
@@ -38,6 +40,7 @@ export function Grid({
   hasMore,
   limit = PRODUCTS_PER_PAGE,
   column = 'auto',
+  bannerVariables = null,
 }: Props) {
   const { t } = useTranslation('common');
 
@@ -70,9 +73,23 @@ export function Grid({
           ? rangeMap(limit, (i) => (
               <ProductLoader key={i} uniqueKey={`product-${i}`} />
             ))
-          : products?.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+          : products?.map((product, i) =>
+              i % 8 == 0 && i !== 0 ? (
+                <>
+                  <div className="col-span-full">
+                    {bannerVariables && (
+                      <PromotionSliders
+                        layout="classic"
+                        variables={bannerVariables}
+                      />
+                    )}
+                  </div>
+                  <ProductCard product={product} key={product.id} />
+                </>
+              ) : (
+                <ProductCard product={product} key={product.id} />
+              ),
+            )}
       </div>
       {hasMore && (
         <div className="flex justify-center mt-8 mb-4 sm:mb-6 lg:mb-2 lg:mt-12">

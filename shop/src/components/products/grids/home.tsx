@@ -7,12 +7,14 @@ interface Props {
   variables: any;
   column?: any;
   gridClassName?: string;
+  bannerVariables?: any;
 }
 export default function ProductGridHome({
   className,
   variables,
   column,
   gridClassName,
+  bannerVariables,
 }: Props) {
   const { query } = useRouter();
   const { products, loadMore, isLoadingMore, isLoading, hasMore, error } =
@@ -34,6 +36,7 @@ export default function ProductGridHome({
       className={className}
       gridClassName={gridClassName}
       column={column}
+      bannerVariables={bannerVariables}
     />
   );
 }

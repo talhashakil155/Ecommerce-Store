@@ -9,8 +9,9 @@ import type { HomePageProps } from '@/types';
 export default function ClassicLayout({ variables }: HomePageProps) {
   return (
     <>
-      <Banner layout="classic" variables={variables.types} />
-      <PromotionSliders variables={variables.types} />
+      <div className="pt-20"></div>
+      {/* <Banner layout="classic" variables={variables.types} /> */}
+      {/* <PromotionSliders variables={variables.types} /> */}
       <FilterBar variables={variables.categories} />
       <Element
         name="grid"
@@ -18,6 +19,7 @@ export default function ClassicLayout({ variables }: HomePageProps) {
       >
         <Categories layout="classic" variables={variables.categories} />
         <ProductGridHome
+          bannerVariables={variables.types}
           className="px-4 pt-3.5 pb-16 lg:p-6 xl:p-8"
           variables={variables.products}
         />
