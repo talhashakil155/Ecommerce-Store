@@ -17,6 +17,8 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import PageHeading from '@/components/common/page-heading';
 import ImportCsv from '@/components/importCsv/importCsv';
+import LinkButton from '@/components/ui/link-button';
+import { Routes } from '@/config/routes';
 
 interface ProductTypeOptions {
   name: string;
@@ -120,6 +122,17 @@ export default function ProductsPage() {
               enableType
               enableProductType
             />
+            <LinkButton
+              href={`${Routes.product.create}`}
+              className="h-12 w-full md:w-auto md:ms-6"
+            >
+              <span className="block md:hidden xl:block">
+                + {t('form:button-label-add-product')}
+              </span>
+              <span className="hidden md:block xl:hidden">
+                + {t('form:button-label-add')}
+              </span>
+            </LinkButton>
           </div>
         </div>
       </Card>
