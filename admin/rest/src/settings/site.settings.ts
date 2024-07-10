@@ -361,23 +361,23 @@ export const siteSettings = {
             label: 'text-admin-list',
             icon: 'AdminListIcon',
           },
-          {
-            href: '',
-            label: 'text-vendors',
-            icon: 'VendorsIcon',
-            childMenu: [
-              {
-                href: Routes.vendorList,
-                label: 'text-all-vendors',
-                icon: 'UsersIcon',
-              },
-              {
-                href: Routes.pendingVendorList,
-                label: 'text-pending-vendors',
-                icon: 'UsersIcon',
-              },
-            ],
-          },
+          // {
+          //   href: '',
+          //   label: 'text-vendors',
+          //   icon: 'VendorsIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.vendorList,
+          //       label: 'text-all-vendors',
+          //       icon: 'UsersIcon',
+          //     },
+          //     {
+          //       href: Routes.pendingVendorList,
+          //       label: 'text-pending-vendors',
+          //       icon: 'UsersIcon',
+          //     },
+          //   ],
+          // },
           {
             href: '',
             label: 'sidebar-nav-item-staffs',
