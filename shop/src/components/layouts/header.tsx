@@ -237,14 +237,14 @@ const Header = ({ layout }: { layout?: string }) => {
                 <div className="hidden lg:inline-flex">
                   {isAuthorize ? <AuthorizedMenu /> : <JoinButton />}
                 </div>
-                <a
+                {/* <a
                   href={`${process.env.NEXT_PUBLIC_ADMIN_URL}/register`}
                   target="_blank"
                   rel="noreferrer"
                   className="hidden h-9 shrink-0 items-center justify-center rounded border border-transparent bg-accent px-3 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-accent-hover focus:shadow focus:outline-none focus:ring-1 focus:ring-accent-700 sm:inline-flex"
                 >
                   {t('text-become-seller')}
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

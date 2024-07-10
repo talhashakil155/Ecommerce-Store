@@ -183,26 +183,26 @@ export const siteSettings = {
             label: 'sidebar-nav-item-categories',
             icon: 'CategoriesIcon',
           },
-          {
-            href: Routes.tag.list,
-            label: 'sidebar-nav-item-tags',
-            icon: 'TagIcon',
-          },
-          {
-            href: Routes.attribute.list,
-            label: 'sidebar-nav-item-attributes',
-            icon: 'AttributeIcon',
-          },
-          {
-            href: Routes.manufacturer.list,
-            label: 'sidebar-nav-item-manufacturers',
-            icon: 'ManufacturersIcon',
-          },
-          {
-            href: Routes.author.list,
-            label: 'sidebar-nav-item-authors',
-            icon: 'AuthorIcon',
-          },
+          // {
+          //   href: Routes.tag.list,
+          //   label: 'sidebar-nav-item-tags',
+          //   icon: 'TagIcon',
+          // },
+          // {
+          //   href: Routes.attribute.list,
+          //   label: 'sidebar-nav-item-attributes',
+          //   icon: 'AttributeIcon',
+          // },
+          // {
+          //   href: Routes.manufacturer.list,
+          //   label: 'sidebar-nav-item-manufacturers',
+          //   icon: 'ManufacturersIcon',
+          // },
+          // {
+          //   href: Routes.author.list,
+          //   label: 'sidebar-nav-item-authors',
+          //   icon: 'AuthorIcon',
+          // },
         ],
       },
 
