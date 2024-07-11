@@ -33,6 +33,7 @@ export const Routes = {
   downloads: '/downloads',
   authors: '/authors',
   author: (slug: string) => `/authors/${encodeURIComponent(slug)}`,
+  blogs_recepies: '/blogs-recipies',
   manufacturers: '/manufacturers',
   manufacturer: (slug: string) => `/manufacturers/${encodeURIComponent(slug)}`,
   nearByShop: ({ lat, lng }: { lat: string; lng: string }) =>

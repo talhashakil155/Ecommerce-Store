@@ -12,7 +12,7 @@ export default function ManufacturersPage() {
       <div className="mx-auto min-h-screen max-w-1920 px-5 py-10 xl:py-14 xl:px-16">
         <div className="flex flex-col items-center">
           <h1 className="mb-4 text-2xl font-bold text-accent sm:text-3xl lg:text-4xl">
-            {t('text-search-manufacturers-title')}
+            Blogs/Recipies
           </h1>
           <p className="text-base text-heading">
             {t('text-search-manufacturers-subtitle')}

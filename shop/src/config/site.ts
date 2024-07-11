@@ -107,7 +107,7 @@ export const siteSettings = {
     // { href: 'location', icon: location, label: 'location' },
     { href: Routes.contactUs, label: 'nav-menu-contact' },
     { href: Routes.flashSale, label: 'nav-menu-flash-sale' },
-    { href: Routes.manufacturers, label: 'Blogs/Recipees' },
+    { href: Routes.blogs_recepies, label: 'Blogs/Recipies' },
     // { href: Routes.authors, label: 'text-authors' },
     { href: Routes.help, label: 'nav-menu-faq' },
     { href: Routes.terms, label: 'nav-menu-terms' },
