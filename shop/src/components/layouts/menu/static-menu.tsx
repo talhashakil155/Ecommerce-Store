@@ -51,12 +51,6 @@ const StaticMenu = () => {
           </Link>
         </li>
       ))}
-      <div
-        className="menuItem group relative mx-3 cursor-pointer py-3 xl:mx-4"
-        onClick={handleOpen}
-      >
-        <LocationOnIcon />
-      </div>
       <li className="menuItem group relative mx-3 cursor-pointer py-3 xl:mx-4">
         <div className="flex items-center gap-2 group-hover:text-accent">
           <span className="text-brand-dark group-hover:text-brand relative inline-flex items-center py-2 font-normal rtl:left-0">
@@ -82,7 +76,12 @@ const StaticMenu = () => {
             ))}
         </ul>
       </li>
-
+      <div
+        className="menuItem group relative mx-3 cursor-pointer py-3 xl:mx-4"
+        onClick={handleOpen}
+      >
+        <LocationOnIcon />
+      </div>
       <Modal
         open={open}
         onClose={handleClose}

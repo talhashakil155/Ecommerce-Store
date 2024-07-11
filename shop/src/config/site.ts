@@ -107,15 +107,15 @@ export const siteSettings = {
     // { href: 'location', icon: location, label: 'location' },
     { href: Routes.contactUs, label: 'nav-menu-contact' },
     { href: Routes.flashSale, label: 'nav-menu-flash-sale' },
-    { href: Routes.manufacturers, label: 'text-manufacturers' },
-    { href: Routes.authors, label: 'text-authors' },
+    { href: Routes.manufacturers, label: 'Blogs/Recipees' },
+    // { href: Routes.authors, label: 'text-authors' },
     { href: Routes.help, label: 'nav-menu-faq' },
     { href: Routes.terms, label: 'nav-menu-terms' },
     { href: Routes.customerRefundPolicies, label: 'nav-menu-refund-policy' },
-    {
-      href: Routes.vendorRefundPolicies,
-      label: 'nav-menu-vendor-refund-policy',
-    },
+    // {
+    //   href: Routes.vendorRefundPolicies,
+    //   label: 'nav-menu-vendor-refund-policy',
+    // },
   ],
   footer: {
     // copyright: {
