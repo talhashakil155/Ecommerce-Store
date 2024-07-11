@@ -7,7 +7,8 @@ const CsvDrag = () => {
   const router = useRouter();
 
   const handleData = (data: any) => {
-    sessionStorage.setItem('csvImportedData', JSON.stringify(data));
+    // sessionStorage.setItem('csvImportedData', JSON.stringify(data));
+    console.log(data);
   };
 
   return (
@@ -19,9 +20,7 @@ const CsvDrag = () => {
         defaultNoHeader={false}
         restartable={true}
         onStart={({ file, fields }) => {}}
-        onComplete={({ file, fields }) => {
-          console.log(fields);
-        }}
+        onComplete={({ file, fields }) => {}}
         onClose={() => {
           router.back();
         }}

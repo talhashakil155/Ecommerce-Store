@@ -9,20 +9,21 @@ import { UploadsService } from './uploads.service';
 
 @Controller('attachments')
 export class UploadsController {
-  constructor(private readonly uploadsService: UploadsService) {}
+  constructor(private readonly uploadsService: UploadsService) { }
 
   @Post()
   @UseInterceptors(FilesInterceptor('attachment[]'))
   uploadFile(@UploadedFiles() attachment: Array<Express.Multer.File>) {
-    console.log(attachment);
+    // console.log(attachment);
+    const base64String = attachment[0]['buffer'].toString('base64');
     return [
       {
-        id: '883',
-        original:
-          'https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/881/aatik-tasneem-7omHUGhhmZ0-unsplash%402x.png',
-        thumbnail:
-          'https://pickbazarlaravel.s3.ap-southeast-1.amazonaws.com/881/conversions/aatik-tasneem-7omHUGhhmZ0-unsplash%402x-thumbnail.jpg',
+        id: '1',
+        original: base64String,
+        thumbnail: base64String,
+        changed: true
       },
     ];
   }
 }
+
