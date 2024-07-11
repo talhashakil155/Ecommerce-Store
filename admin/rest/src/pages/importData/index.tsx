@@ -16,7 +16,7 @@ import { useCategoriesQuery } from '@/data/category';
 import { useRouter } from 'next/router';
 import { Config } from '@/config';
 import PageHeading from '@/components/common/page-heading';
-import CsvDrag from '@/components/csvDrag/csvDrag';
+import CsvDrag from '@/components/csvDrag/CsvDrag';
 export default function ImportData() {
   const { locale } = useRouter();
   const [page, setPage] = useState(1);
