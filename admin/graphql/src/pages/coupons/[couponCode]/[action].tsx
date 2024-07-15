@@ -21,7 +21,7 @@ export default function UpdateCouponPage() {
     },
   });
 
-  console.log(data, 'test');
+  // console.log(data, 'test');
   if (loading) return <Loader text={t('common:text-loading')} />;
   if (error) return <ErrorMessage message={error.message} />;
   return (

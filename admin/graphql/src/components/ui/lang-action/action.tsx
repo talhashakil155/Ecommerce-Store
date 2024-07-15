@@ -34,7 +34,7 @@ export default function LanguageSwitcher({
   } = useRouter();
 
   const preview = `${process.env.NEXT_PUBLIC_SHOP_URL}/products/preview/${slug}`;
-  console.log(slug, 'fsdf sdf ');
+  // console.log(slug, 'fsdf sdf ');
 
   return (
     <>

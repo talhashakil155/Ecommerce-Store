@@ -45,7 +45,7 @@ const LanguageSwitcher = ({
   const { t } = useTranslation('common');
   const { locales, locale } = router;
 
-  console.log(slug, 'test');
+  // console.log(slug, 'test');
 
   let filterItem = [...languageMenu]?.filter(
     (element) => locales?.includes(element?.id),
