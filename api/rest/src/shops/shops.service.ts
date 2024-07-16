@@ -65,7 +65,6 @@ export class ShopsService {
 
     createShopDetails(createRequestBody)
       .then((res) => {
-        console.log("shop created successfully: ", res);
         return getMyshopes()
           .then((res2) => {
             const fetchShops = plainToClass(Shop, res as any[]);
@@ -184,7 +183,6 @@ export class ShopsService {
 
     updateShopDetails(id.toString(), updateRequestBody)
       .then((res) => {
-        console.log("i am here")
         return getMyshopes()
           .then((res2) => {
             (this.shops || []).find((s) => s.id === Number(id));

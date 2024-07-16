@@ -21,8 +21,8 @@ export default function ClassicLayout({ variables }: HomePageProps) {
       limit,
       is_active: 1,
     });
-  console.log('shops: ', shops);
-  console.log('variables: ', variables);
+  // console.log('shops: ', shops);
+  // console.log('variables: ', variables);
   const shop = shops[4];
   const { t } = useTranslation('common');
 

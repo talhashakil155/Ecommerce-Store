@@ -21,6 +21,8 @@ module.exports = {
       'i.pravatar.cc',
       'http://45.79.219.141:8070',
       'drive.google.com',
+      'storage.googleapis.com',
+      'http://34.173.241.166:8069'
     ],
     remotePatterns: [
       {

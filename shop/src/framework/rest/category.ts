@@ -16,8 +16,8 @@ export function useCategories(options?: Partial<CategoryQueryOptions>) {
     "shops": shopSlug? shopSlug[1] : "",
   };
 
-  console.log("options: ", options)
-  console.log("formattedOptions: ", formattedOptions)
+  // console.log("options: ", options)
+  // console.log("formattedOptions: ", formattedOptions)
   const {
     data,
     isLoading,
