@@ -13,31 +13,36 @@ import { Image } from '@/components/ui/image';
 import { productPlaceholder } from '@/lib/placeholders';
 import dayjs from 'dayjs';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 export default function ClassicLayout({ variables }: HomePageProps) {
   const limit = SHOPS_PER_PAGE;
+  const router = useRouter();
   const { shops, isLoading, isLoadingMore, hasMore, loadMore, error } =
     useShops({
       limit,
       is_active: 1,
     });
-  // console.log('shops: ', shops);
-  // console.log('variables: ', variables);
+
   const shop = shops[4];
   const { t } = useTranslation('common');
 
+  // useEffect(() => {
+  //   router.replace('/shops/essendon')
+  // },[])
+
   return (
     <>
-      <div className="pt-20"></div>
+      <div className="pt-20 hidden md:block"></div>
       <Banner layout="classic" variables={variables.types} />
       {/* <PromotionSliders variables={variables.types} /> */}
       <FilterBar variables={variables.categories} />
       <Element
         name="grid"
-        className="flex border-t border-solid border-border-200 border-opacity-70"
+        className="flex flex-col border-t border-solid border-border-200 border-opacity-70 md:flex-row"
       >
-        <div className="flex flex-col p-6 border-b border-gray-200">
-          <div className="flex items-center justify-start mb-4">
+        <div className="flex flex-col p-6 border-b border-gray-200 bg-white my-6 mx-6 md:ml-6 md:mr-0">
+          <div className="flex items-center justify-start mb-4 mt-4">
             <div className="flex items-center justify-center w-24 h-24 border border-gray-200 rounded-full shrink-0">
               <div className="relative w-[calc(100%-8px)] h-[calc(100%-8px)] overflow-hidden bg-gray-200 rounded-full">
                 <Image
@@ -64,10 +69,6 @@ export default function ClassicLayout({ variables }: HomePageProps) {
                     {shop?.products_count}
                   </div>
                   {t('text-products')}
-                </div>
-                <div className="flex justify-center gap-1.5 text-gray-500">
-                  <div className="font-medium text-heading">0</div>
-                  reviews
                 </div>
               </div>
             </div>
