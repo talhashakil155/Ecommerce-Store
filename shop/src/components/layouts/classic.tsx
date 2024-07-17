@@ -79,7 +79,15 @@ export default function ClassicLayout({ variables }: HomePageProps) {
               <ReadMore character={70}>{shop?.description}</ReadMore>
             </div>
           )}
-          <Categories layout="classic" variables={variables.categories} />
+          <Categories
+            layout="classic"
+            variables={{
+              language: 'en',
+              limit: 1000,
+              parent: 'null',
+              type: 'essendon',
+            }}
+          />
         </div>
 
         <ProductGridHome
