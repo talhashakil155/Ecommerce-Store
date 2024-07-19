@@ -27,9 +27,9 @@ export default function ClassicLayout({ variables }: HomePageProps) {
   const shop = shops[4];
   const { t } = useTranslation('common');
 
-  // useEffect(() => {
-  //   router.replace('/shops/essendon')
-  // },[])
+  useEffect(() => {
+    router.replace('/shops/essendon');
+  }, []);
 
   return (
     <>

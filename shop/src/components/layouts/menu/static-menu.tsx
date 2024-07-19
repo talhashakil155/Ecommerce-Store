@@ -8,7 +8,8 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import Input from '@/components/ui/forms/input';
+import Button from '@/components/ui/button';
 
 const StaticMenu = () => {
   const { t } = useTranslation('common');
@@ -31,11 +32,12 @@ const StaticMenu = () => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 600,
+    height: 300,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
+    borderRadius: 2,
   };
 
   return (
@@ -89,10 +91,18 @@ const StaticMenu = () => {
         aria-describedby="modal-description"
       >
         <Box sx={modalStyle}>
-          <Typography id="modal-title" variant="h6" component="h2">
+          <span className="mb-3 block text-2xl font-semibold leading-none text-body-dark mb-6">
             Enter your address
-          </Typography>
-          <TextField
+          </span>
+          <Input
+            label="Address"
+            type="text"
+            variant="outline"
+            className="mb-5"
+            value={address}
+            onChange={handleAddressChange}
+          />
+          {/* <TextField
             id="address-input"
             label="Address"
             variant="outlined"
@@ -100,12 +110,8 @@ const StaticMenu = () => {
             value={address}
             onChange={handleAddressChange}
             sx={{ my: 2 }}
-          />
-          <Button
-            // variant="contained"
-            color="primary"
-            onClick={handleAddressSubmit}
-          >
+          /> */}
+          <Button className="w-full h-11 sm:h-12" onClick={handleAddressSubmit}>
             Submit
           </Button>
         </Box>

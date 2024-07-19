@@ -51,7 +51,7 @@ const StickySidebarListCategories: React.FC<
         <div className="max-h-full grow overflow-hidden">
           <Scrollbar
             className="max-h-screen w-full"
-            style={{ height: 'calc(100vh - 5.35rem)' }}
+            // style={{ height: 'calc(100vh - 5.35rem)' }}
           >
             {!notFound ? (
               isClient ? (

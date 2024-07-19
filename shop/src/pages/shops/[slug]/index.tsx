@@ -2,9 +2,8 @@ import { Image } from '@/components/ui/image';
 import { useWindowSize } from '@/lib/use-window-size';
 import dynamic from 'next/dynamic';
 import { useTranslation } from 'next-i18next';
-import PromotionSliders from '@/components/promotions/promotions';
 import ShopSidebar from '@/components/shops/sidebar';
-import Banner from '@/components/banners/banner';
+import Search from '@/components/ui/search/search';
 import ProductsGrid from '@/components/products/grid';
 import { getLayout } from '@/components/layouts/layout';
 import { useRouter } from 'next/router';
@@ -35,10 +34,10 @@ const ShopPage: NextPageWithLayout<
 
   return (
     <>
-      <div className="w-full ">
+      {/* <div className="w-full ">
         <Banner layout="classic" variables={{ type: shopType }} />
         <PromotionSliders variables={{ type: shopType }} />
-      </div>
+      </div> */}
 
       <div className="flex flex-col bg-gray-100 lg:flex-row lg:items-start lg:p-8">
         <ShopSidebar
@@ -49,6 +48,9 @@ const ShopPage: NextPageWithLayout<
 
         <div className="flex flex-col w-full p-4 pb-12 lg:p-0 ltr:lg:pl-8 rtl:lg:pr-8">
           <div className="relative w-full h-full overflow-hidden rounded">
+            <div className="w-full flex justify-center items-center mb-6">
+              <Search label="search" />
+            </div>
             <Image
               alt={t('heading')}
               src={
@@ -60,6 +62,7 @@ const ShopPage: NextPageWithLayout<
             />
           </div>
           <ProductsGrid
+            bannerVariables={{ type: 'grocery' }}
             className="py-8"
             gridClassName={classNames(
               'grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3',

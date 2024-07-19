@@ -74,7 +74,7 @@ export function Grid({
               <ProductLoader key={i} uniqueKey={`product-${i}`} />
             ))
           : products?.map((product, i) =>
-              i % 8 == 0 && i !== 0 ? (
+              i % 4 == 0 && i !== 0 ? (
                 <>
                   <div className="col-span-full">
                     {bannerVariables && (
@@ -110,18 +110,22 @@ interface ProductsGridProps {
   gridClassName?: string;
   variables?: any;
   column?: 'five' | 'auto';
+  bannerVariables?: any;
 }
 export default function ProductsGrid({
   className,
   gridClassName,
   variables,
   column = 'auto',
+  bannerVariables,
 }: ProductsGridProps) {
   const { query } = useRouter();
   const categories = query?.category;
+  const name = query?.text;
   variables = {
     ...variables,
     categories: categories ?? null,
+    name: name ?? null,
   };
   const { products, loadMore, isLoadingMore, isLoading, hasMore, error } =
     useProducts(variables);
@@ -129,6 +133,7 @@ export default function ProductsGrid({
   const productsItem: any = products;
   return (
     <Grid
+      bannerVariables={bannerVariables}
       products={productsItem}
       loadMore={loadMore}
       isLoading={isLoading}
